@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelajaran & Kuis: Penegakan Hukum Berkeadilan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at 10% 12%, rgba(56, 189, 248, 0.24), transparent 36%),
+                radial-gradient(circle at 90% 10%, rgba(168, 85, 247, 0.20), transparent 38%),
+                radial-gradient(circle at 82% 88%, rgba(251, 191, 36, 0.22), transparent 40%),
+                radial-gradient(circle at 18% 85%, rgba(16, 185, 129, 0.18), transparent 38%),
+                linear-gradient(135deg, #eef6ff 0%, #f5f3ff 50%, #ecfdf5 100%);
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start sm:justify-center p-3 sm:p-6">
+    <main class="w-full max-w-3xl glass-card rounded-3xl shadow-xl border-2 border-white/80 overflow-hidden my-auto">
+        <!-- HEADER -->
+        <header class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-5 sm:px-8 py-5">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                    <p class="text-[11px] font-bold uppercase tracking-wider text-amber-200">Media Pembelajaran & Kuis Interaktif</p>
+                    <h1 class="text-xl sm:text-2xl font-extrabold">Penegakan Hukum Berkeadilan</h1>
+                </div>
+                <div id="header-quiz-controls" class="hidden flex items-center gap-2">
+                    <div id="timer-box" class="bg-slate-900/60 px-3 py-1.5 rounded-xl border border-white/20 flex items-center gap-1.5">
+                        <span id="timer-display" class="text-xs sm:text-sm font-extrabold font-mono text-emerald-300">10:00</span>
+                    </div>
+                    <div class="bg-amber-400 text-slate-950 px-3 py-1.5 rounded-xl font-extrabold text-sm">
+                        Poin: <span id="live-score">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- LAYAR 1: DATA PESERTA & MATERI -->
+        <section id="material-screen" class="p-5 sm:p-8 fade-in">
+            <div class="mb-6 rounded-2xl border border-indigo-200 bg-indigo-50/50 p-4 sm:p-5">
+                <h2 class="font-bold text-slate-900 text-base mb-3">Data Peserta</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label for="participant-name" class="block text-xs font-bold text-slate-700 mb-1">
+                            Nama Peserta <span class="text-rose-500">*</span>
+                        </label>
+                        <input id="participant-name" type="text" placeholder="Contoh: Maulida Desiano Putri"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm" />
+                        <p id="name-validation-msg" class="hidden text-xs font-semibold text-rose-600 mt-1">
+                            Isi Nama Peserta dulu sebelum mulai kuis.
+                        </p>
+                    </div>
+                    <div>
+                        <label for="participant-nim-class" class="block text-xs font-bold text-slate-700 mb-1">
+                            NIM / Kelas (Opsional)
+                        </label>
+                        <input id="participant-nim-class" type="text" placeholder="Contoh: 26262011377 / Kelas A"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3 mb-6 text-sm text-slate-700">
+                <div class="p-4 rounded-2xl border border-blue-200 bg-blue-50/40">
+                    <h3 class="font-bold text-slate-900">A. Negara Hukum & Konstitusi</h3>
+                    <p class="mt-1">Pasal 1 ayat (3) UUD NRI 1945 menegaskan Indonesia adalah negara hukum, sedangkan Pasal 27 ayat (1) menjamin kesamaan kedudukan di hadapan hukum.</p>
+                </div>
+                <div class="p-4 rounded-2xl border border-purple-200 bg-purple-50/40">
+                    <h3 class="font-bold text-slate-900">B. Tujuan Hukum & Keadilan</h3>
+                    <p class="mt-1">Gustav Radbruch menyoroti keadilan, kepastian hukum, dan kemanfaatan. Jika terjadi pertentangan ekstrem, keadilan substantif perlu diutamakan.</p>
+                </div>
+                <div class="p-4 rounded-2xl border border-emerald-200 bg-emerald-50/40">
+                    <h3 class="font-bold text-slate-900">C. Restorative Justice & Aparat Penegak Hukum</h3>
+                    <p class="mt-1"><em>Restorative justice</em> menekankan pemulihan korban dan harmoni sosial, sementara penegakan hukum dipengaruhi aturan, aparat, sarana, masyarakat, dan budaya.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 pt-5">
+                <p class="text-xs sm:text-sm text-slate-600">Total <strong>10 soal</strong> &bull; Percobaan ke-1: +10 poin &bull; Ke-2: +5 poin &bull; Ke-3+: +0 poin.</p>
+                <button id="start-quiz-btn" type="button" class="w-full sm:w-auto px-7 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-md cursor-pointer">
+                    Mulai Kuis (10 Soal) &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- LAYAR 2: KUIS 10 SOAL -->
+        <section id="quiz-screen" class="hidden p-5 sm:p-8 fade-in">
+            <div class="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-600 mb-2">
+                <span id="question-progress-text">Soal 1 dari 10</span>
+                <span id="attempt-indicator" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                    Percobaan ke-1 (Potensi: +10 Poin)
+                </span>
+            </div>
+            <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden mb-6">
+                <div id="progress-bar" class="bg-gradient-to-r from-blue-600 to-purple-600 h-full transition-all duration-300" style="width: 10%"></div>
+            </div>
+
+            <h2 id="question-text" class="text-base sm:text-lg font-bold text-slate-900 mb-5 leading-relaxed"></h2>
+            <div id="options-container" class="space-y-3 mb-6"></div>
+
+            <div id="feedback-box" class="hidden rounded-2xl p-4 mb-6 border">
+                <div class="flex items-center justify-between gap-2 mb-1">
+                    <div id="feedback-title" class="font-bold text-sm sm:text-base"></div>
+                    <span id="points-badge" class="hidden px-2.5 py-0.5 rounded-full text-xs font-bold"></span>
+                </div>
+                <p id="feedback-body" class="text-sm text-slate-700"></p>
+            </div>
+
+            <div class="flex justify-end">
+                <button id="next-btn" type="button" class="hidden px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl cursor-pointer">
+                    Soal Berikutnya &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- LAYAR 3: HASIL AKHIR -->
+        <section id="result-screen" class="hidden p-5 sm:p-8 fade-in text-center">
+            <h2 class="text-2xl font-extrabold text-slate-900">Hasil Kuis Selesai</h2>
+            <p id="result-participant-summary" class="text-sm font-semibold text-indigo-700 mt-1"></p>
+            <div class="mt-5 bg-gradient-to-br from-blue-600 to-purple-700 text-white rounded-2xl p-6 max-w-xs mx-auto shadow-lg">
+                <p class="text-xs uppercase tracking-wider text-indigo-100">Total Skor</p>
+                <div class="text-5xl font-extrabold text-amber-300 my-1"><span id="final-score">0</span><span class="text-xl text-indigo-200"> / 100</span></div>
+            </div>
+            <div id="review-list" class="mt-6 space-y-2.5 text-left"></div>
+            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-3">
+                <button id="restart-quiz-btn" type="button" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-xl cursor-pointer">Ulangi Kuis</button>
+                <button id="back-to-material-btn" type="button" class="px-6 py-3 bg-white border border-slate-300 text-slate-800 font-semibold rounded-xl cursor-pointer">Kembali ke Awal</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const quizQuestions = [
+            {
+                question: "Kasus 1: Lansia miskin memungut ranting kering dan diproses pidana. Demi keadilan sosial, hakim memutus ringan. Prinsip Radbruch mana yang dipakai?",
+                options: [
+                    "Mendahulukan kepastian hukum tertulis secara kaku demi wibawa aturan",
+                    "Mendahulukan keadilan substantif saat konflik ekstrem dengan bunyi pasal",
+                    "Menghapus keberlakuan hukum pidana tertulis di seluruh wilayah pedesaan",
+                    "Menyamakan sanksi pidana tanpa meninjau kondisi sosial maupun ekonomi"
+                ],
+                correctIndex: 1,
+                explanation: "Saat terjadi pertentangan ekstrem antara teks aturan dan rasa keadilan, Radbruch menekankan keadilan substantif perlu didahulukan."
+            },
+            {
+                question: "Kasus 2: Pengadilan menyediakan juru bahasa isyarat gratis bagi saksi disabilitas rungu. Sesuai keadilan Aristoteles dan Pasal 28D ayat (1), ini wujud...",
+                options: [
+                    "Pelanggaran persamaan hukum karena memberi fasilitas khusus bagi warga",
+                    "Keadilan komutatif yang menuntut kesamaan perlakuan matematis mutlak",
+                    "Keadilan distributif proporsional untuk menjamin kesetaraan akses hukum",
+                    "Penyalahgunaan wewenang peradilan di luar ketentuan hukum acara baku"
+                ],
+                correctIndex: 2,
+                explanation: "Keadilan distributif memberi akses secara proporsional sesuai kebutuhan agar kelompok rentan mendapat perlindungan hukum yang setara."
+            },
+            {
+                question: "Kasus 3: Dua warga berdamai usai luka ringan dan ganti rugi penuh, lalu jaksa menghentikan penuntutan lewat Restorative Justice. Tujuan utamanya adalah...",
+                options: [
+                    "Memaksimalkan efek jera lewat hukuman penjara yang paling berat",
+                    "Memulihkan kerugian korban dan harmoni sosial ke keadaan semula",
+                    "Menghapus seluruh kewenangan pengadilan dalam memeriksa tindak pidana",
+                    "Membebaskan pelaku kejahatan berat asalkan mampu membayar ganti rugi"
+                ],
+                correctIndex: 1,
+                explanation: "Restorative justice berfokus memulihkan keadaan korban dan relasi sosial, bukan semata pembalasan penjara."
+            },
+            {
+                question: "Kasus 4: Dalam sengketa kontrak aset digital baru yang belum diatur rinci di UU, hakim menggali nilai keadilan masyarakat. Kewenangan ini disebut...",
+                options: [
+                    "Rechtsvinding (penemuan hukum) oleh hakim yang merdeka sesuai Pasal 24",
+                    "Dominus litis (pengendali perkara) untuk menyusun surat dakwaan jaksa",
+                    "Legislasi yudisial mutlak untuk membatalkan seluruh undang-undang lama",
+                    "Eksekusi putusan inkracht guna memaksa pihak kalah membayar kerugian"
+                ],
+                correctIndex: 0,
+                explanation: "Hakim wajib menggali nilai hukum masyarakat (rechtsvinding) ketika aturan tertulis belum jelas atau belum mengatur secara lengkap."
+            },
+            {
+                question: "Kasus 5: UU anti-korupsi sudah tegas, tetapi korupsi masih marak karena suap aparat dan budaya 'uang terima kasih'. Menurut Soekanto, kendalanya ada pada...",
+                options: [
+                    "Kekosongan norma dan kurang beratnya ancaman pidana pada undang-undang",
+                    "Kurangnya fasilitas gedung sidang dan perangkat teknologi pengadilan",
+                    "Integritas penegak hukum serta budaya permisif di dalam masyarakat",
+                    "Minimnya jumlah advokat yang mendampingi perkara tindak pidana khusus"
+                ],
+                correctIndex: 2,
+                explanation: "Selain aturan, efektivitas hukum sangat ditentukan integritas aparat penegak hukum dan nilai budaya yang hidup di masyarakat."
+            },
+            {
+                question: "Kasus 6: Tersangka dipaksa mengaku tanpa didampingi advokat dan dilabeli 'bersalah' oleh media sebelum sidang. Tindakan ini melanggar prinsip negara hukum karena...",
+                options: [
+                    "Mengabaikan praduga tak bersalah serta hak bantuan hukum sejak awal",
+                    "Menerapkan asas retroaktif pada peristiwa pidana yang terjadi di masa lalu",
+                    "Menggunakan diskresi penyidik untuk menentukan vonis sebelum persidangan",
+                    "Mengutamakan keadilan prosedural demi meredam reaksi publik di media"
+                ],
+                correctIndex: 0,
+                explanation: "Negara hukum menjamin asas praduga tak bersalah hingga ada putusan inkracht serta hak didampingi advokat sejak pemeriksaan awal."
+            },
+            {
+                question: "Kasus 7: Dalam Catur Wangsa, penyidikan dilakukan Polri dan penuntutan oleh Kejaksaan. Pemisahan fungsi ini bertujuan untuk...",
+                options: [
+                    "Memungkinkan polisi memutus perkara langsung agar sidang lebih cepat",
+                    "Menghadirkan kontrol saling uji alat bukti sebelum perkara disidangkan",
+                    "Memberi jaksa wewenang tunggal menangkap tersangka tanpa penyidikan",
+                    "Memperpanjang masa tahanan tersangka tanpa penetapan pengadilan"
+                ],
+                correctIndex: 1,
+                explanation: "Pembedaan fungsi penyidikan dan penuntutan menciptakan mekanisme check and balances atas kelengkapan bukti sebelum ke pengadilan."
+            },
+            {
+                question: "Kasus 8: Perda disahkan sah secara prosedur, namun menutup akses air warga adat demi proyek komersial tanpa kompensasi. Masalah utamanya adalah...",
+                options: [
+                    "Sah secara prosedur sehingga isinya tidak dapat diuji secara konstitusional",
+                    "Memenuhi legalitas formal tetapi melanggar keadilan substantif warga",
+                    "Mewujudkan kemanfaatan hukum karena memprioritaskan investasi daerah",
+                    "Menerapkan keadilan distributif dengan mengalihkan sumber daya ke swasta"
+                ],
+                correctIndex: 1,
+                explanation: "Hukum yang adil tidak cukup sah secara prosedur pembentukan, tetapi juga harus melindungi hak substantif warga negara."
+            },
+            {
+                question: "Kasus 9: Pejabat diperiksa lambat dengan fasilitas mewah, sedangkan warga biasa cepat ditahan di sel standar. Ketimpangan ini bertentangan dengan...",
+                options: [
+                    "Pasal 27 ayat (1) UUD 1945 tentang persamaan kedudukan di dalam hukum",
+                    "Asas kebebasan berkontrak dalam mengatur penyelesaian sengketa perdata",
+                    "Diskresi aparat untuk menyesuaikan standar sel berdasarkan jabatan publik",
+                    "Keadilan restoratif yang mewajibkan damai bagi pelaku berstatus tinggi"
+                ],
+                correctIndex: 0,
+                explanation: "Pasal 27 ayat (1) UUD 1945 menegaskan kesamaan kedudukan setiap warga negara di hadapan hukum tanpa pandang status atau jabatan."
+            },
+            {
+                question: "Kasus 10: Advokat mendampingi terdakwa kasus berat yang dikecam publik. Peran advokat tetap penting dalam sistem peradilan berkeadilan karena...",
+                options: [
+                    "Membenarkan seluruh perbuatan pidana klien agar bebas dari hukuman",
+                    "Menjalankan officium nobile demi menjamin proses peradilan yang adil",
+                    "Menggantikan peran hakim dalam menjatuhkan putusan di ruang sidang",
+                    "Hanya boleh mendampingi pihak yang sudah dinyatakan tidak bersalah"
+                ],
+                correctIndex: 1,
+                explanation: "Sebagai officium nobile, advokat menjaga agar hak pembelaan terdakwa terpenuhi sehingga proses peradilan berlangsung adil (fair trial)."
+            }
+        ];
+
+        const TOTAL_QUIZ_SECONDS = 600;
+        let currentQuestionIndex = 0;
+        let totalScore = 0;
+        let attemptsOnCurrentQuestion = 0;
+        let isQuestionSolved = false;
+        let quizHistory = [];
+        let remainingSeconds = TOTAL_QUIZ_SECONDS;
+        let timerInterval = null;
+        let participantInfo = { name: "", nimClass: "" };
+
+        const materialScreen = document.getElementById("material-screen");
+        const quizScreen = document.getElementById("quiz-screen");
+        const resultScreen = document.getElementById("result-screen");
+        const headerQuizControls = document.getElementById("header-quiz-controls");
+        const participantNameInput = document.getElementById("participant-name");
+        const participantNimInput = document.getElementById("participant-nim-class");
+        const nameValidationMsg = document.getElementById("name-validation-msg");
+        const timerDisplay = document.getElementById("timer-display");
+        const liveScoreEl = document.getElementById("live-score");
+        const questionProgressText = document.getElementById("question-progress-text");
+        const attemptIndicator = document.getElementById("attempt-indicator");
+        const progressBar = document.getElementById("progress-bar");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options-container");
+        const feedbackBox = document.getElementById("feedback-box");
+        const feedbackTitle = document.getElementById("feedback-title");
+        const pointsBadge = document.getElementById("points-badge");
+        const feedbackBody = document.getElementById("feedback-body");
+        const nextBtn = document.getElementById("next-btn");
+
+        document.getElementById("start-quiz-btn").addEventListener("click", () => {
+            const nameVal = participantNameInput.value.trim();
+            if (!nameVal) {
+                nameValidationMsg.classList.remove("hidden");
+                participantNameInput.focus();
+                return;
+            }
+            nameValidationMsg.classList.add("hidden");
+            startQuiz(nameVal, participantNimInput.value.trim());
+        });
+
+        nextBtn.addEventListener("click", () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        document.getElementById("restart-quiz-btn").addEventListener("click", () => {
+            startQuiz(participantInfo.name, participantInfo.nimClass);
+        });
+
+        document.getElementById("back-to-material-btn").addEventListener("click", () => {
+            clearInterval(timerInterval);
+            resultScreen.classList.add("hidden");
+            quizScreen.classList.add("hidden");
+            headerQuizControls.classList.add("hidden");
+            materialScreen.classList.remove("hidden");
+        });
+
+        function startQuiz(nameVal, nimVal) {
+            participantInfo = { name: nameVal, nimClass: nimVal };
+            currentQuestionIndex = 0;
+            totalScore = 0;
+            quizHistory = [];
+            remainingSeconds = TOTAL_QUIZ_SECONDS;
+            liveScoreEl.textContent = "0";
+
+            materialScreen.classList.add("hidden");
+            resultScreen.classList.add("hidden");
+            quizScreen.classList.remove("hidden");
+            headerQuizControls.classList.remove("hidden");
+
+            clearInterval(timerInterval);
+            updateTimerText();
+            timerInterval = setInterval(() => {
+                remainingSeconds--;
+                updateTimerText();
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    showResults();
+                }
+            }, 1000);
+
+            loadQuestion();
+        }
+
+        function updateTimerText() {
+            const safe = Math.max(0, remainingSeconds);
+            const m = String(Math.floor(safe / 60)).padStart(2, "0");
+            const s = String(safe % 60).padStart(2, "0");
+            timerDisplay.textContent = `${m}:${s}`;
+        }
+
+        function updateAttemptIndicator() {
+            if (isQuestionSolved) return;
+            const nextAttempt = attemptsOnCurrentQuestion + 1;
+            if (nextAttempt === 1) {
+                attemptIndicator.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800";
+                attemptIndicator.textContent = "Percobaan ke-1 (Potensi: +10 Poin)";
+            } else if (nextAttempt === 2) {
+                attemptIndicator.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800";
+                attemptIndicator.textContent = "Percobaan ke-2 (Potensi: +5 Poin)";
+            } else {
+                attemptIndicator.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-800";
+                attemptIndicator.textContent = `Percobaan ke-${nextAttempt} (Potensi: +0 Poin)`;
+            }
+        }
+
+        function loadQuestion() {
+            attemptsOnCurrentQuestion = 0;
+            isQuestionSolved = false;
+            feedbackBox.classList.add("hidden");
+            pointsBadge.classList.add("hidden");
+            nextBtn.classList.add("hidden");
+
+            const q = quizQuestions[currentQuestionIndex];
+            const num = currentQuestionIndex + 1;
+            questionProgressText.textContent = `Soal ${num} dari ${quizQuestions.length}`;
+            progressBar.style.width = `${Math.round((num / quizQuestions.length) * 100)}%`;
+            updateAttemptIndicator();
+            questionText.textContent = `${num}. ${q.question}`;
+
+            optionsContainer.innerHTML = "";
+            const letters = ["A", "B", "C", "D"];
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition flex items-start gap-3 cursor-pointer";
+                btn.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-bold text-sm flex items-center justify-center shrink-0">${letters[idx]}</span>
+                    <span class="text-sm sm:text-base text-slate-700 font-medium">${opt}</span>
+                `;
+                btn.addEventListener("click", () => handleSelect(idx, btn));
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleSelect(selectedIndex, btnEl) {
+            if (isQuestionSolved) return;
+            attemptsOnCurrentQuestion++;
+            const q = quizQuestions[currentQuestionIndex];
+
+            if (selectedIndex === q.correctIndex) {
+                isQuestionSolved = true;
+                btnEl.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 flex items-start gap-3";
+                optionsContainer.querySelectorAll("button").forEach(b => { b.disabled = true; });
+
+                let pts = 0;
+                let badgeBg = "bg-slate-600 text-white";
+                if (attemptsOnCurrentQuestion === 1) { pts = 10; badgeBg = "bg-emerald-600 text-white"; }
+                else if (attemptsOnCurrentQuestion === 2) { pts = 5; badgeBg = "bg-amber-500 text-white"; }
+
+                totalScore += pts;
+                liveScoreEl.textContent = String(totalScore);
+                attemptIndicator.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-800 text-white";
+                attemptIndicator.textContent = `Selesai (+${pts} Poin)`;
+
+                quizHistory.push({
+                    number: currentQuestionIndex + 1,
+                    question: q.question,
+                    correctAnswer: q.options[q.correctIndex],
+                    earnedPoints: pts,
+                    attempts: attemptsOnCurrentQuestion
+                });
+
+                feedbackBox.className = "rounded-2xl p-4 mb-6 border bg-emerald-50 border-emerald-200";
+                feedbackTitle.className = "font-bold text-sm sm:text-base text-emerald-900";
+                feedbackTitle.textContent = `Jawaban Benar (Percobaan ke-${attemptsOnCurrentQuestion})`;
+                pointsBadge.textContent = `+${pts} Poin`;
+                pointsBadge.className = `px-2.5 py-0.5 rounded-full text-xs font-bold ${badgeBg}`;
+                pointsBadge.classList.remove("hidden");
+                feedbackBody.textContent = q.explanation;
+
+                nextBtn.textContent = (currentQuestionIndex === quizQuestions.length - 1) ? "Lihat Hasil Akhir" : "Soal Berikutnya →";
+                nextBtn.classList.remove("hidden");
+            } else {
+                btnEl.disabled = true;
+                btnEl.className = "w-full text-left p-4 rounded-xl border border-rose-300 bg-rose-50 opacity-75 flex items-start gap-3 cursor-not-allowed";
+                updateAttemptIndicator();
+                feedbackBox.className = "rounded-2xl p-4 mb-6 border bg-rose-50 border-rose-200";
+                feedbackTitle.className = "font-bold text-sm sm:text-base text-rose-900";
+                feedbackTitle.textContent = `Belum Tepat (Percobaan ke-${attemptsOnCurrentQuestion} Salah)`;
+                pointsBadge.classList.add("hidden");
+                feedbackBody.textContent = "Coba analisis kembali kasusnya dan pilih opsi lain.";
+            }
+        }
+
+        function showResults() {
+            clearInterval(timerInterval);
+            quizScreen.classList.add("hidden");
+            headerQuizControls.classList.add("hidden");
+            resultScreen.classList.remove("hidden");
+
+            document.getElementById("result-participant-summary").textContent =
+                participantInfo.nimClass ? `${participantInfo.name} (${participantInfo.nimClass})` : participantInfo.name;
+            document.getElementById("final-score").textContent = String(totalScore);
+
+            const reviewList = document.getElementById("review-list");
+            reviewList.innerHTML = "";
+            quizQuestions.forEach((q, idx) => {
+                const rec = quizHistory.find(h => h.number === idx + 1);
+                const statusText = rec ? `+${rec.earnedPoints} Poin (Percobaan ke-${rec.attempts})` : "+0 Poin (Belum terjawab)";
+                const item = document.createElement("div");
+                item.className = "p-3.5 rounded-xl border border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-2";
+                item.innerHTML = `
+                    <div class="text-xs sm:text-sm">
+                        <p class="font-bold text-slate-900">${idx + 1}. ${q.question}</p>
+                        <p class="text-emerald-700 font-medium mt-0.5">Kunci: ${q.options[q.correctIndex]}</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 text-xs font-bold shrink-0">${statusText}</span>
+                `;
+                reviewList.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>
